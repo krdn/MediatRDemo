@@ -1,5 +1,8 @@
 using DemoLibrary;
 using DemoLibrary.DataAccess;
+using DemoLibrary.Interface;
+using MediatR;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,8 +13,28 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddSingleton<IDataAccess, DemoDataAccess>();
+
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(DemoLibraryMediatREntrypoint).Assembly));
+
+//builder.Services.AddSingleton<IDataAccess, DemoDataAccess>();
+builder.Services.Scan(scan => scan
+        .FromAssemblyOf<DemoLibraryMediatREntrypoint>() // This is scanning the DemoLibrary assembly
+        //.FromAssemblies(typeof(DemoLibraryMediatREntrypoint).Assembly) // This is scanning the DemoApi assembly
+        //.FromAssemblyOf<ITransientService>()
+        .AddClasses(classes => classes.AssignableTo<ITransientService>())
+        .AsImplementedInterfaces()
+        .WithTransientLifetime() // Transient
+        //.FromAssemblyOf<IScopedService>()
+        .AddClasses(classes => classes.AssignableTo<IScopedService>())
+        .AsImplementedInterfaces()
+        .WithScopedLifetime() // Scoped
+        //.FromAssemblyOf<ISingletonService>()
+        .AddClasses(classes => classes.AssignableTo<ISingletonService>())
+        .AsImplementedInterfaces()
+        .WithSingletonLifetime() // Singleton
+);
+
+
 
 var app = builder.Build();
 

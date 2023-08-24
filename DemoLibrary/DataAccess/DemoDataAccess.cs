@@ -1,7 +1,8 @@
-﻿using DemoLibrary.Models;
+﻿using DemoLibrary.Interface;
+using DemoLibrary.Models;
 
 namespace DemoLibrary.DataAccess;
-public class DemoDataAccess : IDataAccess
+public class DemoDataAccess : IDataAccess//, ISingletonService
 {
     private readonly List<PersonModel> _people = new();
 
