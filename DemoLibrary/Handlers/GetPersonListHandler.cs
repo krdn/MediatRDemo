@@ -4,17 +4,18 @@ using DemoLibrary.Queries;
 using MediatR;
 
 namespace DemoLibrary.Handlers;
-public class GetPersonListHandler : IRequestHandler<GetPersonListQuery, List<PersonModel>>
-{
-    private readonly IDataAccess _data;
 
-    public GetPersonListHandler(IDataAccess data)
-    {
-        _data = data;
-    }
+//public class GetPersonListHandler : IRequestHandler<GetPersonListQuery, List<PersonModel>>
+//{
+//    private readonly IDataAccess _data;
 
-    public Task<List<PersonModel>> Handle(GetPersonListQuery request, CancellationToken cancellationToken)
-    {
-        return Task.FromResult(_data.GetPeople());
-    }
-}
+//    public GetPersonListHandler(IDataAccess data)
+//    {
+//        _data = data;
+//    }
+
+//    public Task<List<PersonModel>> Handle(GetPersonListQuery request, CancellationToken cancellationToken)
+//    {
+//        return Task.FromResult(_data.GetPeople());
+//    }
+//}

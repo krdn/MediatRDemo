@@ -2,7 +2,7 @@
 using DemoLibrary.Models;
 
 namespace DemoLibrary.DataAccess;
-public class DemoDataAccess : IDataAccess//, ISingletonService
+public class DemoDataAccess : IDataAccess
 {
     private readonly List<PersonModel> _people = new();
 

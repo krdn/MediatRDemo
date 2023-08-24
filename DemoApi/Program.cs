@@ -1,8 +1,5 @@
 using DemoLibrary;
-using DemoLibrary.DataAccess;
 using DemoLibrary.Interface;
-using MediatR;
-
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,7 +10,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
+// Query, Command 핸들러를 등록한다.
+// IRequestHandler 인터페이스를 구현한 핸들러를 등록한다.
+// IRequest 인터페이스를 구현한 핸들러를 등록한다.
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(DemoLibraryMediatREntrypoint).Assembly));
 
 //builder.Services.AddSingleton<IDataAccess, DemoDataAccess>();
@@ -33,8 +32,6 @@ builder.Services.Scan(scan => scan
         .AsImplementedInterfaces()
         .WithSingletonLifetime() // Singleton
 );
-
-
 
 var app = builder.Build();
 
