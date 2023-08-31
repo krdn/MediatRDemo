@@ -1,4 +1,5 @@
 ﻿using DemoLibrary.DataAccess;
+using DemoLibrary.Logger;
 using DemoLibrary.Models;
 using MediatR;
 
@@ -10,10 +11,12 @@ public record GetPersonListQuery() : IRequest<List<PersonModel>>;
 public class GetPersonListHandler : IRequestHandler<GetPersonListQuery, List<PersonModel>>
 {
     private readonly IDataAccess _data;
+    private readonly IApiLogger _logger;
 
-    public GetPersonListHandler(IDataAccess data)
+    public GetPersonListHandler(IDataAccess data, IApiLogger logger)
     {
         _data = data;
+        _logger = logger;
     }
 
     public Task<List<PersonModel>> Handle(GetPersonListQuery request, CancellationToken cancellationToken)

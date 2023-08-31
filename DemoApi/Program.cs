@@ -1,5 +1,7 @@
 using DemoLibrary;
+using DemoLibrary.Handlers;
 using DemoLibrary.Interface;
+using MediatR;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +16,7 @@ builder.Services.AddSwaggerGen();
 // IRequestHandler 인터페이스를 구현한 핸들러를 등록한다.
 // IRequest 인터페이스를 구현한 핸들러를 등록한다.
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(DemoLibraryMediatREntrypoint).Assembly));
+//builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(MediatRLoggingBehavior<,>));
 
 //builder.Services.AddSingleton<IDataAccess, DemoDataAccess>();
 builder.Services.Scan(scan => scan
