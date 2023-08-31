@@ -6,7 +6,7 @@ using System.Text.Json;
 using System.Text.Unicode;
 using DemoLibrary.Interface;
 
-namespace DemoLibrary.Handlers;
+namespace DemoLibrary.Behaviors;
 
 
 /// <summary>
@@ -22,12 +22,12 @@ namespace DemoLibrary.Handlers;
 /// <typeparam name="TResponse"></typeparam>
 public interface IMediatRLoggingBehavior<TRequest, TResponse>
     : IPipelineBehavior<TRequest, TResponse>, ITransientService
-    where TRequest : MediatR.IRequest<TResponse>
+    where TRequest : IRequest<TResponse>
 { }
 
 public class MediatRLoggingBehavior<TRequest, TResponse>
     : IMediatRLoggingBehavior<TRequest, TResponse>
-    where TRequest : MediatR.IRequest<TResponse>
+    where TRequest : IRequest<TResponse>
 {
     private readonly IApiLogger _logger;
 
