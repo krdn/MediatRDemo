@@ -1,7 +1,7 @@
 using DemoLibrary;
-using DemoLibrary.Handlers;
 using DemoLibrary.Interface;
 using MediatR;
+using MediatR.NotificationPublishers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +15,12 @@ builder.Services.AddSwaggerGen();
 // Query, Command 핸들러를 등록한다.
 // IRequestHandler 인터페이스를 구현한 핸들러를 등록한다.
 // IRequest 인터페이스를 구현한 핸들러를 등록한다.
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(DemoLibraryMediatREntrypoint).Assembly));
+builder.Services.AddMediatR(cfg =>
+{
+    cfg.RegisterServicesFromAssembly(typeof(DemoLibraryMediatREntrypoint).Assembly);
+
+    cfg.NotificationPublisher = new TaskWhenAllPublisher();
+});
 //builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(MediatRLoggingBehavior<,>));
 
 //builder.Services.AddSingleton<IDataAccess, DemoDataAccess>();
