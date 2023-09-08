@@ -1,6 +1,6 @@
-﻿using DemoLibrary.Commands;
+﻿using DemoLibrary.CQRS.Commands;
+using DemoLibrary.CQRS.Queries;
 using DemoLibrary.Models;
-using DemoLibrary.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

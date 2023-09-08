@@ -53,7 +53,7 @@ public class MediatRLoggingBehavior<TRequest, TResponse>
 
         var timer = new Stopwatch();
         timer.Start();
-        var response = next();
+        var response = next(); 
         timer.Stop();
 
         string responseMessage = JsonSerializer.Serialize(response.Result,

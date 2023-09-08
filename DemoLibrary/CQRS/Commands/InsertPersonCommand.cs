@@ -2,7 +2,7 @@
 using DemoLibrary.Models;
 using MediatR;
 
-namespace DemoLibrary.Commands;
+namespace DemoLibrary.CQRS.Commands;
 
 
 // IRequest상속된 메소드를 호출하면 연결된 IRequestHandler를 찾아서 실행한다.
@@ -19,19 +19,3 @@ public record InsertPersonCommand(string FirstName, string LastName) : IRequest<
 //        LastName = lastName;
 //    }
 //}
-
-
-public class InsertPersonHandler : IRequestHandler<InsertPersonCommand, PersonModel>
-{
-    private readonly IDataAccess _data;
-
-    public InsertPersonHandler(IDataAccess data)
-    {
-        _data = data;
-    }
-
-    public Task<PersonModel> Handle(InsertPersonCommand request, CancellationToken cancellationToken)
-    {
-        return Task.FromResult(_data.InsertPerson(request.FirstName, request.LastName));
-    }
-}
