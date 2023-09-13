@@ -17,9 +17,14 @@ builder.Services.AddSwaggerGen();
 // IRequest 인터페이스를 구현한 핸들러를 등록한다.
 builder.Services.AddMediatR(cfg =>
 {
-    cfg.RegisterServicesFromAssembly(typeof(DemoLibraryMediatREntrypoint).Assembly);
+    //cfg.RegisterServicesFromAssembly(typeof(DemoLibraryMediatREntrypoint).Assembly);
 
-    cfg.NotificationPublisher = new TaskWhenAllPublisher();
+    cfg.RegisterServicesFromAssemblyContaining<DemoLibraryMediatREntrypoint>();
+
+    //cfg.NotificationPublisher = new TaskWhenAllPublisher();
+    cfg.NotificationPublisher = new ForeachAwaitPublisher();
+
+
 });
 //builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(MediatRLoggingBehavior<,>));
 

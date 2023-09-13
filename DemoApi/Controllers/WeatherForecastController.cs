@@ -24,6 +24,9 @@ public class WeatherForecastController : ControllerBase
     {
         // https://www.youtube.com/watch?v=qIxNHf3wbLw
         var response = await _mediator.Send(new WeatherMessage());
+
+        await _mediator.Publish(new AuditNotification { Message = "Weather forecast retrieved" });
+
         return response;
     }
 

@@ -19,7 +19,7 @@ public class InsertPersonHandler : IRequestHandler<InsertPersonCommand, PersonMo
 
     public async Task<PersonModel> Handle(InsertPersonCommand request, CancellationToken cancellationToken)
     {
-        await _publisher.Publish(new InsertPersonEvent(request.FirstName, request.LastName), cancellationToken);
+        await _publisher.Publish(new InsertPersonCommand(request.FirstName, request.LastName), cancellationToken);
 
         return await Task.FromResult(_data.InsertPerson(request.FirstName, request.LastName));
     }

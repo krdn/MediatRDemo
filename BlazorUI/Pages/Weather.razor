@@ -50,7 +50,7 @@ else
         await Task.Delay(1000);
 
         var startDate = DateOnly.FromDateTime(DateTime.Now);
-        forecasts = Enumerable.Range(1, 5).Select(index => new WeatherForecast
+        forecasts = Enumerable.Range(1, 5).Select(index => new DemoLibrary.Models.WeatherForecast
         {
             Date = startDate.AddDays(index),
             TemperatureC = Random.Shared.Next(-20, 55),
